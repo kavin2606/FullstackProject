@@ -4,13 +4,44 @@ const { GraphQLServer } = require('graphql-yoga')
 const typeDefs = `
 type Query {
   info: String!
+  feed: [Item!]!
+}
+
+type Item {
+  id: ID!
+  name: String!
+  description: String!
+  quantity: Int!
+  comment: String!
+  rating: String!
 }
 `
 
 // 2  actual implementation of the GraphQL schema
+// 1
+let items = [{
+  id: 'item-0',
+  name: 'pen',
+  description: 'used to write',
+  quantity: 5,
+  comment: 'please buy me',
+  rating: 'Good'
+}]
+
 const resolvers = {
   Query: {
-    info: () => `This is the API of a Hackernews Clone`
+    info: () => `This is the API of a e-Commerce Website`,
+    // 2
+    feed: () => items,
+  },
+  // 3
+  Item: {
+    id: (parent) => parent.id,
+    name: (parent) => parent.name,
+    description: (parent) => parent.description,
+    quantity: (parent) => parent.quantity,
+    comment: (parent) => parent.comment,
+    rating: (parent) => parent.rating,
   }
 }
 
