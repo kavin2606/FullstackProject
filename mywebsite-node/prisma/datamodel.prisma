@@ -1,0 +1,9 @@
+type Item {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  name: String!
+  description: String!
+  quantity: String!
+  comment: String!
+  rating: String!
+}
