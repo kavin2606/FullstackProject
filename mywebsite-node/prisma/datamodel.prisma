@@ -6,4 +6,12 @@ type Item {
   quantity: String!
   comment: String!
   rating: String!
+  postedBy: User
+}
+type User {
+  id: ID! @id
+  name: String!
+  email: String! @unique
+  password: String!
+  items: [Item!]!
 }
