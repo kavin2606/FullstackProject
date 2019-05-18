@@ -1,0 +1,17 @@
+type Query {
+  info: String!
+  feed: [Item!]!
+}
+
+type Mutation {
+  post(  name: String!,description: String!,quantity: String!,comment: String!,rating: String!): Item!
+}
+
+type Item {
+  id: ID!
+  name: String!
+  description: String!
+  quantity: String!
+  comment: String!
+  rating: String!
+}

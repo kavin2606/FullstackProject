@@ -1,40 +1,35 @@
 const { GraphQLServer } = require('graphql-yoga')
 
-// 1 defines your GraphQL schema
-const typeDefs = `
-type Query {
-  info: String!
-  feed: [Item!]!
-}
-
-type Item {
-  id: ID!
-  name: String!
-  description: String!
-  quantity: Int!
-  comment: String!
-  rating: String!
-}
-`
-
-// 2  actual implementation of the GraphQL schema
-// 1
 let items = [{
   id: 'item-0',
   name: 'pen',
   description: 'used to write',
-  quantity: 5,
+  quantity: '5',
   comment: 'please buy me',
   rating: 'Good'
 }]
 
+let idCount = items.length
+
 const resolvers = {
   Query: {
     info: () => `This is the API of a e-Commerce Website`,
-    // 2
     feed: () => items,
   },
-  // 3
+  Mutation: {
+  post: (parent, args) => {
+     const item = {
+      id: `item-${idCount++}`,
+      name: args.name,
+      description: args.description,
+      quantity: args.quantity,
+      comment: args.comment,
+      rating: args.rating,
+    }
+    items.push(item)
+    return item
+  }
+},
   Item: {
     id: (parent) => parent.id,
     name: (parent) => parent.name,
@@ -47,7 +42,7 @@ const resolvers = {
 
 // 3  the schema and resolvers are bundled and passed to the GraphQLServer
 const server = new GraphQLServer({
-  typeDefs,
+  typeDefs: './src/schema.graphql',
   resolvers,
 })
 server.start(() => console.log(`Server is running on http://localhost:4000`))
