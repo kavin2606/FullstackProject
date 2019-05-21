@@ -1,6 +1,6 @@
 type Query {
   info: String!
-  feed: [Item!]!
+  feed(filter: String): [Item!]!
 }
 
 type Mutation {
