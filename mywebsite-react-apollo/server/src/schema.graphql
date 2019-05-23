@@ -1,0 +1,32 @@
+type Query {
+  info: String!
+  feed(filter: String): [Item!]!
+}
+
+type Mutation {
+  post(  name: String!,description: String!,quantity: String!,comment: String!,rating: String!): Item!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+type Item {
+  id: ID!
+  name: String!
+  description: String!
+  quantity: String!
+  comment: String!
+  rating: String!
+  postedBy: User
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  items: [Item!]!
+}
