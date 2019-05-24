@@ -15,10 +15,17 @@ type User {
   email: String! @unique
   password: String!
   items: [Item!]!
+  itemsordered: [Item!]!
 }
 
 type Category {
   id: ID! @id
   name: String! @unique
   itemslist: [Item!]!
+}
+
+type Order {
+  id: ID! @id
+  orderedby:User!
+  itempurchased: Item!
 }

@@ -8,6 +8,7 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   addcategory(name:String!): Category
+  placeorder(itempurchased:String!): Order
 }
 
 type Item {
@@ -19,6 +20,7 @@ type Item {
   rating: String!
   postedBy: User
   category: Category
+  orderinfo: [Order!]!
 }
 
 type AuthPayload {
@@ -31,10 +33,17 @@ type User {
   name: String!
   email: String!
   items: [Item!]!
+  orderdetails: [Order!]!
 }
 
 type Category {
   id: ID!
   name: String!
   itemslist:[Item!]!
+}
+
+type Order {
+  id: ID!
+  itempurchased: Item!
+  orderedby: User!
 }

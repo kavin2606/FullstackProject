@@ -5,6 +5,7 @@ const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Item = require('./resolvers/Item')
 const Category = require('./resolvers/Category')
+const Order = require('./resolvers/Order')
 // let items = [{
 //   id: 'item-0',
 //   name: 'pen',
@@ -21,7 +22,8 @@ const resolvers = {
   Mutation,
   User,
   Item,
-  Category
+  Category,
+  Order
 }
 
 // 3  the schema and resolvers are bundled and passed to the GraphQLServer
