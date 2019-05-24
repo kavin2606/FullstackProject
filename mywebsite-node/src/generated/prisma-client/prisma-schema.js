@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateItem {
+/* GraphQL */ `type AggregateCategory {
+  count: Int!
+}
+
+type AggregateItem {
   count: Int!
 }
 
@@ -15,6 +19,138 @@ type BatchPayload {
   count: Long!
 }
 
+type Category {
+  id: ID!
+  name: String!
+  itemslist(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
+}
+
+type CategoryConnection {
+  pageInfo: PageInfo!
+  edges: [CategoryEdge]!
+  aggregate: AggregateCategory!
+}
+
+input CategoryCreateInput {
+  id: ID
+  name: String!
+  itemslist: ItemCreateManyWithoutCategoryInput
+}
+
+input CategoryCreateOneWithoutItemslistInput {
+  create: CategoryCreateWithoutItemslistInput
+  connect: CategoryWhereUniqueInput
+}
+
+input CategoryCreateWithoutItemslistInput {
+  id: ID
+  name: String!
+}
+
+type CategoryEdge {
+  node: Category!
+  cursor: String!
+}
+
+enum CategoryOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type CategoryPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type CategorySubscriptionPayload {
+  mutation: MutationType!
+  node: Category
+  updatedFields: [String!]
+  previousValues: CategoryPreviousValues
+}
+
+input CategorySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CategoryWhereInput
+  AND: [CategorySubscriptionWhereInput!]
+  OR: [CategorySubscriptionWhereInput!]
+  NOT: [CategorySubscriptionWhereInput!]
+}
+
+input CategoryUpdateInput {
+  name: String
+  itemslist: ItemUpdateManyWithoutCategoryInput
+}
+
+input CategoryUpdateManyMutationInput {
+  name: String
+}
+
+input CategoryUpdateOneWithoutItemslistInput {
+  create: CategoryCreateWithoutItemslistInput
+  update: CategoryUpdateWithoutItemslistDataInput
+  upsert: CategoryUpsertWithoutItemslistInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: CategoryWhereUniqueInput
+}
+
+input CategoryUpdateWithoutItemslistDataInput {
+  name: String
+}
+
+input CategoryUpsertWithoutItemslistInput {
+  update: CategoryUpdateWithoutItemslistDataInput!
+  create: CategoryCreateWithoutItemslistInput!
+}
+
+input CategoryWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  itemslist_every: ItemWhereInput
+  itemslist_some: ItemWhereInput
+  itemslist_none: ItemWhereInput
+  AND: [CategoryWhereInput!]
+  OR: [CategoryWhereInput!]
+  NOT: [CategoryWhereInput!]
+}
+
+input CategoryWhereUniqueInput {
+  id: ID
+  name: String
+}
+
 scalar DateTime
 
 type Item {
@@ -22,6 +158,7 @@ type Item {
   createdAt: DateTime!
   name: String!
   description: String!
+  category: Category
   quantity: String!
   comment: String!
   rating: String!
@@ -38,10 +175,16 @@ input ItemCreateInput {
   id: ID
   name: String!
   description: String!
+  category: CategoryCreateOneWithoutItemslistInput
   quantity: String!
   comment: String!
   rating: String!
   postedBy: UserCreateOneWithoutItemsInput
+}
+
+input ItemCreateManyWithoutCategoryInput {
+  create: [ItemCreateWithoutCategoryInput!]
+  connect: [ItemWhereUniqueInput!]
 }
 
 input ItemCreateManyWithoutPostedByInput {
@@ -49,10 +192,21 @@ input ItemCreateManyWithoutPostedByInput {
   connect: [ItemWhereUniqueInput!]
 }
 
+input ItemCreateWithoutCategoryInput {
+  id: ID
+  name: String!
+  description: String!
+  quantity: String!
+  comment: String!
+  rating: String!
+  postedBy: UserCreateOneWithoutItemsInput
+}
+
 input ItemCreateWithoutPostedByInput {
   id: ID
   name: String!
   description: String!
+  category: CategoryCreateOneWithoutItemslistInput
   quantity: String!
   comment: String!
   rating: String!
@@ -209,6 +363,7 @@ input ItemSubscriptionWhereInput {
 input ItemUpdateInput {
   name: String
   description: String
+  category: CategoryUpdateOneWithoutItemslistInput
   quantity: String
   comment: String
   rating: String
@@ -231,6 +386,18 @@ input ItemUpdateManyMutationInput {
   rating: String
 }
 
+input ItemUpdateManyWithoutCategoryInput {
+  create: [ItemCreateWithoutCategoryInput!]
+  delete: [ItemWhereUniqueInput!]
+  connect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueWithoutCategoryInput!]
+  upsert: [ItemUpsertWithWhereUniqueWithoutCategoryInput!]
+  deleteMany: [ItemScalarWhereInput!]
+  updateMany: [ItemUpdateManyWithWhereNestedInput!]
+}
+
 input ItemUpdateManyWithoutPostedByInput {
   create: [ItemCreateWithoutPostedByInput!]
   delete: [ItemWhereUniqueInput!]
@@ -248,17 +415,38 @@ input ItemUpdateManyWithWhereNestedInput {
   data: ItemUpdateManyDataInput!
 }
 
-input ItemUpdateWithoutPostedByDataInput {
+input ItemUpdateWithoutCategoryDataInput {
   name: String
   description: String
   quantity: String
   comment: String
   rating: String
+  postedBy: UserUpdateOneWithoutItemsInput
+}
+
+input ItemUpdateWithoutPostedByDataInput {
+  name: String
+  description: String
+  category: CategoryUpdateOneWithoutItemslistInput
+  quantity: String
+  comment: String
+  rating: String
+}
+
+input ItemUpdateWithWhereUniqueWithoutCategoryInput {
+  where: ItemWhereUniqueInput!
+  data: ItemUpdateWithoutCategoryDataInput!
 }
 
 input ItemUpdateWithWhereUniqueWithoutPostedByInput {
   where: ItemWhereUniqueInput!
   data: ItemUpdateWithoutPostedByDataInput!
+}
+
+input ItemUpsertWithWhereUniqueWithoutCategoryInput {
+  where: ItemWhereUniqueInput!
+  update: ItemUpdateWithoutCategoryDataInput!
+  create: ItemCreateWithoutCategoryInput!
 }
 
 input ItemUpsertWithWhereUniqueWithoutPostedByInput {
@@ -318,6 +506,7 @@ input ItemWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  category: CategoryWhereInput
   quantity: String
   quantity_not: String
   quantity_in: [String!]
@@ -373,6 +562,12 @@ input ItemWhereUniqueInput {
 scalar Long
 
 type Mutation {
+  createCategory(data: CategoryCreateInput!): Category!
+  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
+  updateManyCategories(data: CategoryUpdateManyMutationInput!, where: CategoryWhereInput): BatchPayload!
+  upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
+  deleteCategory(where: CategoryWhereUniqueInput!): Category
+  deleteManyCategories(where: CategoryWhereInput): BatchPayload!
   createItem(data: ItemCreateInput!): Item!
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
@@ -405,6 +600,9 @@ type PageInfo {
 }
 
 type Query {
+  category(where: CategoryWhereUniqueInput!): Category
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
+  categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
   item(where: ItemWhereUniqueInput!): Item
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
@@ -415,6 +613,7 @@ type Query {
 }
 
 type Subscription {
+  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }

@@ -49,11 +49,24 @@ function post(parent, args, context, info) {
     rating: args.rating,
     quantity: args.quantity,
     postedBy: { connect: { id: userId } },
+    category: {
+  connect:{
+    name:args.category
+  }
+  },
   })
 }
+
+function addcategory(parent, args, context, info) {
+  return context.prisma.createCategory({
+    name: args.name,
+  })
+}
+
 
 module.exports = {
   signup,
   login,
   post,
+  addcategory,
 }
