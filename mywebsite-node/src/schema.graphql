@@ -1,6 +1,7 @@
 type Query {
   info: String!
   feed(filter: String): [Item!]!
+  usersorders: User!
 }
 
 type Mutation {
@@ -8,7 +9,7 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   addcategory(name:String!): Category
-  placeorder(itempurchased:String!): Order
+  placeorder(id:String!): Order
 }
 
 type Item {

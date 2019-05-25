@@ -23,7 +23,7 @@ const resolvers = {
   User,
   Item,
   Category,
-  Order
+  Order,
 }
 
 // 3  the schema and resolvers are bundled and passed to the GraphQLServer
