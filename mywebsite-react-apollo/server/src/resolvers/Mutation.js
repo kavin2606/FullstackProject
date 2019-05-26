@@ -49,11 +49,31 @@ function post(parent, args, context, info) {
     rating: args.rating,
     quantity: args.quantity,
     postedBy: { connect: { id: userId } },
+    category: {connect:{name:args.category}},
+
   })
 }
+
+function addcategory(parent, args, context, info) {
+  return context.prisma.createCategory({
+    name: args.name,
+  })
+}
+
+function placeorder(parent,args,context,info) {
+  const userId = getUserId(context)
+  return context.prisma.createOrder({
+  orderedby: { connect: { id: userId } },
+  itempurchased: { connect: { id:args.itempurchased } },
+  })
+
+}
+
 
 module.exports = {
   signup,
   login,
   post,
+  addcategory,
+  placeorder,
 }

@@ -11,11 +11,19 @@ var models = [
   {
     name: "User",
     embedded: false
+  },
+  {
+    name: "Category",
+    embedded: false
+  },
+  {
+    name: "Order",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://us1.prisma.sh/kavin-arasu-ezhil-arasu/mywebsite-node/dev`
+  endpoint: `https://us1.prisma.sh/kaurManjot/mywebsite-node/dev`
 });
 exports.prisma = new exports.Prisma();
