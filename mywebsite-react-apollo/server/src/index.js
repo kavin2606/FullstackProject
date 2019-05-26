@@ -28,7 +28,7 @@ const resolvers = {
 
 // 3  the schema and resolvers are bundled and passed to the GraphQLServer
 const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
+  typeDefs: './schema.graphql',
   resolvers,
   context: request => {
     return {
