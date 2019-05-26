@@ -1,12 +1,15 @@
 type Query {
   info: String!
   feed(filter: String): [Item!]!
+  usersorders: User!
 }
 
 type Mutation {
-  post(  name: String!,description: String!,quantity: String!,comment: String!,rating: String!): Item!
+  post(name: String!,description: String!,category: String! ,quantity: String!,comment: String!,rating: String!): Item!
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
+  addcategory(name:String!): Category
+  placeorder(id:String!): Order
 }
 
 type Item {
@@ -17,6 +20,8 @@ type Item {
   comment: String!
   rating: String!
   postedBy: User
+  category: Category
+  orderinfo: [Order!]!
 }
 
 type AuthPayload {
@@ -29,4 +34,17 @@ type User {
   name: String!
   email: String!
   items: [Item!]!
+  orderdetails: [Order!]!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  itemslist:[Item!]!
+}
+
+type Order {
+  id: ID!
+  itempurchased: Item!
+  orderedby: User!
 }
