@@ -1,12 +1,10 @@
 type Item {
   id: ID! @id
   createdAt: DateTime! @createdAt
-  name: String!
+  title: String!
   description: String!
   category: Category
   quantity: String!
-  comment: String!
-  rating: String!
   postedBy: User
 }
 type User {
@@ -26,6 +24,8 @@ type Category {
 
 type Order {
   id: ID! @id
+  comment: String!
+  rating: String!
   orderedby:User!
   itempurchased: Item!
 }
