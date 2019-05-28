@@ -43,8 +43,8 @@ type Category {
 
 type Order {
   id: ID!
-  comment: String!
-  rating: String!
+  comment: String
+  rating: String
   itempurchased: Item!
   orderedby: User!
 }

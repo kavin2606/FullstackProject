@@ -43,7 +43,7 @@ async function login(parent, args, context, info) {
 function createItem(parent, args, context, info) {
   const userId = getUserId(context)
   return context.prisma.createItem({
-    title: args.name,
+    title: args.title,
     description: args.description,
     quantity: args.quantity,
     postedBy: { connect: { id: userId } },
