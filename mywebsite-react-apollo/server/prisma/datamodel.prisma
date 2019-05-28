@@ -5,15 +5,15 @@ type Item {
   description: String!
   category: Category
   quantity: String!
-  postedBy: User
+  postedBy: User @relation(name: "OldRelation")
 }
 type User {
   id: ID! @id
   name: String!
   email: String! @unique
   password: String!
-  items: [Item!]!
-  itemsordered: [Item!]!
+  items: [Item!]! @relation(name: "OldRelation")
+  itemsordered: [Item!]! @relation(name: "NewRelation")
 }
 
 type Category {
