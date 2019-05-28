@@ -186,6 +186,11 @@ input ItemCreateInput {
   postedBy: UserCreateOneWithoutItemsInput
 }
 
+input ItemCreateManyInput {
+  create: [ItemCreateInput!]
+  connect: [ItemWhereUniqueInput!]
+}
+
 input ItemCreateManyWithoutCategoryInput {
   create: [ItemCreateWithoutCategoryInput!]
   connect: [ItemWhereUniqueInput!]
@@ -397,6 +402,18 @@ input ItemUpdateManyDataInput {
   rating: String
 }
 
+input ItemUpdateManyInput {
+  create: [ItemCreateInput!]
+  update: [ItemUpdateWithWhereUniqueNestedInput!]
+  upsert: [ItemUpsertWithWhereUniqueNestedInput!]
+  delete: [ItemWhereUniqueInput!]
+  connect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  deleteMany: [ItemScalarWhereInput!]
+  updateMany: [ItemUpdateManyWithWhereNestedInput!]
+}
+
 input ItemUpdateManyMutationInput {
   name: String
   description: String
@@ -459,6 +476,11 @@ input ItemUpdateWithoutPostedByDataInput {
   rating: String
 }
 
+input ItemUpdateWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput!
+  data: ItemUpdateDataInput!
+}
+
 input ItemUpdateWithWhereUniqueWithoutCategoryInput {
   where: ItemWhereUniqueInput!
   data: ItemUpdateWithoutCategoryDataInput!
@@ -470,6 +492,12 @@ input ItemUpdateWithWhereUniqueWithoutPostedByInput {
 }
 
 input ItemUpsertNestedInput {
+  update: ItemUpdateDataInput!
+  create: ItemCreateInput!
+}
+
+input ItemUpsertWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput!
   update: ItemUpdateDataInput!
   create: ItemCreateInput!
 }
@@ -745,6 +773,7 @@ type User {
   email: String!
   password: String!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
+  itemsordered(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
 }
 
 type UserConnection {
@@ -759,6 +788,7 @@ input UserCreateInput {
   email: String!
   password: String!
   items: ItemCreateManyWithoutPostedByInput
+  itemsordered: ItemCreateManyInput
 }
 
 input UserCreateOneInput {
@@ -776,6 +806,7 @@ input UserCreateWithoutItemsInput {
   name: String!
   email: String!
   password: String!
+  itemsordered: ItemCreateManyInput
 }
 
 type UserEdge {
@@ -824,6 +855,7 @@ input UserUpdateDataInput {
   email: String
   password: String
   items: ItemUpdateManyWithoutPostedByInput
+  itemsordered: ItemUpdateManyInput
 }
 
 input UserUpdateInput {
@@ -831,6 +863,7 @@ input UserUpdateInput {
   email: String
   password: String
   items: ItemUpdateManyWithoutPostedByInput
+  itemsordered: ItemUpdateManyInput
 }
 
 input UserUpdateManyMutationInput {
@@ -859,6 +892,7 @@ input UserUpdateWithoutItemsDataInput {
   name: String
   email: String
   password: String
+  itemsordered: ItemUpdateManyInput
 }
 
 input UserUpsertNestedInput {
@@ -931,6 +965,9 @@ input UserWhereInput {
   items_every: ItemWhereInput
   items_some: ItemWhereInput
   items_none: ItemWhereInput
+  itemsordered_every: ItemWhereInput
+  itemsordered_some: ItemWhereInput
+  itemsordered_none: ItemWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

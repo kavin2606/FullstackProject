@@ -250,10 +250,11 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface ItemUpsertWithWhereUniqueWithoutCategoryInput {
-  where: ItemWhereUniqueInput;
-  update: ItemUpdateWithoutCategoryDataInput;
-  create: ItemCreateWithoutCategoryInput;
+export interface UserUpdateWithoutItemsDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  itemsordered?: Maybe<ItemUpdateManyInput>;
 }
 
 export type CategoryWhereUniqueInput = AtLeastOne<{
@@ -261,12 +262,14 @@ export type CategoryWhereUniqueInput = AtLeastOne<{
   name?: Maybe<String>;
 }>;
 
-export interface ItemUpdateManyDataInput {
+export interface ItemUpdateDataInput {
   name?: Maybe<String>;
   description?: Maybe<String>;
+  category?: Maybe<CategoryUpdateOneWithoutItemslistInput>;
   quantity?: Maybe<String>;
   comment?: Maybe<String>;
   rating?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneWithoutItemsInput>;
 }
 
 export interface UserWhereInput {
@@ -329,41 +332,47 @@ export interface UserWhereInput {
   items_every?: Maybe<ItemWhereInput>;
   items_some?: Maybe<ItemWhereInput>;
   items_none?: Maybe<ItemWhereInput>;
+  itemsordered_every?: Maybe<ItemWhereInput>;
+  itemsordered_some?: Maybe<ItemWhereInput>;
+  itemsordered_none?: Maybe<ItemWhereInput>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface ItemCreateManyWithoutCategoryInput {
-  create?: Maybe<
-    ItemCreateWithoutCategoryInput[] | ItemCreateWithoutCategoryInput
-  >;
-  connect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
-}
-
-export interface OrderCreateInput {
-  id?: Maybe<ID_Input>;
-  orderedby: UserCreateOneInput;
-  itempurchased: ItemCreateOneInput;
-}
-
-export interface ItemCreateWithoutCategoryInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  description: String;
-  quantity: String;
-  comment: String;
-  rating: String;
-  postedBy?: Maybe<UserCreateOneWithoutItemsInput>;
-}
-
-export interface CategoryUpdateManyMutationInput {
-  name?: Maybe<String>;
-}
-
 export interface UserCreateOneWithoutItemsInput {
   create?: Maybe<UserCreateWithoutItemsInput>;
   connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface ItemUpdateManyMutationInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  quantity?: Maybe<String>;
+  comment?: Maybe<String>;
+  rating?: Maybe<String>;
+}
+
+export interface UserCreateWithoutItemsInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  password: String;
+  itemsordered?: Maybe<ItemCreateManyInput>;
+}
+
+export interface CategoryUpdateOneWithoutItemslistInput {
+  create?: Maybe<CategoryCreateWithoutItemslistInput>;
+  update?: Maybe<CategoryUpdateWithoutItemslistDataInput>;
+  upsert?: Maybe<CategoryUpsertWithoutItemslistInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<CategoryWhereUniqueInput>;
+}
+
+export interface ItemCreateManyInput {
+  create?: Maybe<ItemCreateInput[] | ItemCreateInput>;
+  connect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
 }
 
 export interface OrderSubscriptionWhereInput {
@@ -377,11 +386,15 @@ export interface OrderSubscriptionWhereInput {
   NOT?: Maybe<OrderSubscriptionWhereInput[] | OrderSubscriptionWhereInput>;
 }
 
-export interface UserCreateWithoutItemsInput {
+export interface ItemCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
-  email: String;
-  password: String;
+  description: String;
+  category?: Maybe<CategoryCreateOneWithoutItemslistInput>;
+  quantity: String;
+  comment: String;
+  rating: String;
+  postedBy?: Maybe<UserCreateOneWithoutItemsInput>;
 }
 
 export interface CategorySubscriptionWhereInput {
@@ -399,9 +412,9 @@ export interface CategorySubscriptionWhereInput {
   >;
 }
 
-export interface CategoryUpdateInput {
-  name?: Maybe<String>;
-  itemslist?: Maybe<ItemUpdateManyWithoutCategoryInput>;
+export interface CategoryCreateOneWithoutItemslistInput {
+  create?: Maybe<CategoryCreateWithoutItemslistInput>;
+  connect?: Maybe<CategoryWhereUniqueInput>;
 }
 
 export interface UserUpdateInput {
@@ -409,6 +422,26 @@ export interface UserUpdateInput {
   email?: Maybe<String>;
   password?: Maybe<String>;
   items?: Maybe<ItemUpdateManyWithoutPostedByInput>;
+  itemsordered?: Maybe<ItemUpdateManyInput>;
+}
+
+export interface CategoryCreateWithoutItemslistInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+}
+
+export type ItemWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface CategoryUpdateInput {
+  name?: Maybe<String>;
+  itemslist?: Maybe<ItemUpdateManyWithoutCategoryInput>;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
 }
 
 export interface ItemUpdateManyWithoutCategoryInput {
@@ -433,42 +466,13 @@ export interface ItemUpdateManyWithoutCategoryInput {
   >;
 }
 
-export type ItemWhereUniqueInput = AtLeastOne<{
+export type OrderWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
 export interface ItemUpdateWithWhereUniqueWithoutCategoryInput {
   where: ItemWhereUniqueInput;
   data: ItemUpdateWithoutCategoryDataInput;
-}
-
-export interface ItemUpdateOneRequiredInput {
-  create?: Maybe<ItemCreateInput>;
-  update?: Maybe<ItemUpdateDataInput>;
-  upsert?: Maybe<ItemUpsertNestedInput>;
-  connect?: Maybe<ItemWhereUniqueInput>;
-}
-
-export interface ItemUpdateWithoutCategoryDataInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  quantity?: Maybe<String>;
-  comment?: Maybe<String>;
-  rating?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutItemsInput>;
-}
-
-export type OrderWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface UserUpdateOneWithoutItemsInput {
-  create?: Maybe<UserCreateWithoutItemsInput>;
-  update?: Maybe<UserUpdateWithoutItemsDataInput>;
-  upsert?: Maybe<UserUpsertWithoutItemsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
 }
 
 export interface OrderWhereInput {
@@ -493,10 +497,165 @@ export interface OrderWhereInput {
   NOT?: Maybe<OrderWhereInput[] | OrderWhereInput>;
 }
 
-export interface UserUpdateWithoutItemsDataInput {
+export interface ItemUpdateWithoutCategoryDataInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  quantity?: Maybe<String>;
+  comment?: Maybe<String>;
+  rating?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneWithoutItemsInput>;
+}
+
+export interface ItemUpdateWithWhereUniqueWithoutPostedByInput {
+  where: ItemWhereUniqueInput;
+  data: ItemUpdateWithoutPostedByDataInput;
+}
+
+export interface UserUpdateOneWithoutItemsInput {
+  create?: Maybe<UserCreateWithoutItemsInput>;
+  update?: Maybe<UserUpdateWithoutItemsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutItemsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
+  items?: Maybe<ItemUpdateManyWithoutPostedByInput>;
+  itemsordered?: Maybe<ItemUpdateManyInput>;
+}
+
+export interface ItemCreateManyWithoutPostedByInput {
+  create?: Maybe<
+    ItemCreateWithoutPostedByInput[] | ItemCreateWithoutPostedByInput
+  >;
+  connect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+}
+
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface ItemUpdateManyInput {
+  create?: Maybe<ItemCreateInput[] | ItemCreateInput>;
+  update?: Maybe<
+    | ItemUpdateWithWhereUniqueNestedInput[]
+    | ItemUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | ItemUpsertWithWhereUniqueNestedInput[]
+    | ItemUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+  connect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+  set?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+  disconnect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+  deleteMany?: Maybe<ItemScalarWhereInput[] | ItemScalarWhereInput>;
+  updateMany?: Maybe<
+    ItemUpdateManyWithWhereNestedInput[] | ItemUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ItemCreateOneInput {
+  create?: Maybe<ItemCreateInput>;
+  connect?: Maybe<ItemWhereUniqueInput>;
+}
+
+export interface ItemUpdateWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput;
+  data: ItemUpdateDataInput;
+}
+
+export interface ItemCreateManyWithoutCategoryInput {
+  create?: Maybe<
+    ItemCreateWithoutCategoryInput[] | ItemCreateWithoutCategoryInput
+  >;
+  connect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+}
+
+export interface CategoryWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  itemslist_every?: Maybe<ItemWhereInput>;
+  itemslist_some?: Maybe<ItemWhereInput>;
+  itemslist_none?: Maybe<ItemWhereInput>;
+  AND?: Maybe<CategoryWhereInput[] | CategoryWhereInput>;
+  OR?: Maybe<CategoryWhereInput[] | CategoryWhereInput>;
+  NOT?: Maybe<CategoryWhereInput[] | CategoryWhereInput>;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  password: String;
+  items?: Maybe<ItemCreateManyWithoutPostedByInput>;
+  itemsordered?: Maybe<ItemCreateManyInput>;
+}
+
+export interface UserUpdateManyMutationInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+}
+
+export interface CategoryUpdateWithoutItemslistDataInput {
+  name?: Maybe<String>;
+}
+
+export interface ItemUpdateOneRequiredInput {
+  create?: Maybe<ItemCreateInput>;
+  update?: Maybe<ItemUpdateDataInput>;
+  upsert?: Maybe<ItemUpsertNestedInput>;
+  connect?: Maybe<ItemWhereUniqueInput>;
+}
+
+export interface CategoryUpsertWithoutItemslistInput {
+  update: CategoryUpdateWithoutItemslistDataInput;
+  create: CategoryCreateWithoutItemslistInput;
 }
 
 export interface ItemUpdateWithoutPostedByDataInput {
@@ -508,9 +667,10 @@ export interface ItemUpdateWithoutPostedByDataInput {
   rating?: Maybe<String>;
 }
 
-export interface UserUpsertWithoutItemsInput {
-  update: UserUpdateWithoutItemsDataInput;
-  create: UserCreateWithoutItemsInput;
+export interface ItemUpsertWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput;
+  update: ItemUpdateDataInput;
+  create: ItemCreateInput;
 }
 
 export interface ItemUpdateManyWithoutPostedByInput {
@@ -533,23 +693,6 @@ export interface ItemUpdateManyWithoutPostedByInput {
   updateMany?: Maybe<
     ItemUpdateManyWithWhereNestedInput[] | ItemUpdateManyWithWhereNestedInput
   >;
-}
-
-export interface ItemCreateWithoutPostedByInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  description: String;
-  category?: Maybe<CategoryCreateOneWithoutItemslistInput>;
-  quantity: String;
-  comment: String;
-  rating: String;
-}
-
-export interface UserUpdateDataInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  items?: Maybe<ItemUpdateManyWithoutPostedByInput>;
 }
 
 export interface ItemScalarWhereInput {
@@ -660,83 +803,34 @@ export interface ItemUpdateManyWithWhereNestedInput {
   data: ItemUpdateManyDataInput;
 }
 
-export interface UserSubscriptionWhereInput {
+export interface CategoryCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  itemslist?: Maybe<ItemCreateManyWithoutCategoryInput>;
+}
+
+export interface ItemUpdateManyDataInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  quantity?: Maybe<String>;
+  comment?: Maybe<String>;
+  rating?: Maybe<String>;
+}
+
+export interface ItemSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  node?: Maybe<ItemWhereInput>;
+  AND?: Maybe<ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput>;
+  OR?: Maybe<ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput>;
+  NOT?: Maybe<ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput>;
 }
 
-export interface CategoryWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  itemslist_every?: Maybe<ItemWhereInput>;
-  itemslist_some?: Maybe<ItemWhereInput>;
-  itemslist_none?: Maybe<ItemWhereInput>;
-  AND?: Maybe<CategoryWhereInput[] | CategoryWhereInput>;
-  OR?: Maybe<CategoryWhereInput[] | CategoryWhereInput>;
-  NOT?: Maybe<CategoryWhereInput[] | CategoryWhereInput>;
-}
-
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-}
-
-export interface ItemCreateManyWithoutPostedByInput {
-  create?: Maybe<
-    ItemCreateWithoutPostedByInput[] | ItemCreateWithoutPostedByInput
-  >;
-  connect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
-}
-
-export interface ItemUpdateDataInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  category?: Maybe<CategoryUpdateOneWithoutItemslistInput>;
-  quantity?: Maybe<String>;
-  comment?: Maybe<String>;
-  rating?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutItemsInput>;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  password: String;
-  items?: Maybe<ItemCreateManyWithoutPostedByInput>;
+export interface UserUpsertWithoutItemsInput {
+  update: UserUpdateWithoutItemsDataInput;
+  create: UserCreateWithoutItemsInput;
 }
 
 export interface ItemUpsertWithWhereUniqueWithoutPostedByInput {
@@ -745,54 +839,16 @@ export interface ItemUpsertWithWhereUniqueWithoutPostedByInput {
   create: ItemCreateWithoutPostedByInput;
 }
 
-export interface UserCreateOneInput {
-  create?: Maybe<UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface ItemUpdateWithWhereUniqueWithoutPostedByInput {
+export interface ItemUpsertWithWhereUniqueWithoutCategoryInput {
   where: ItemWhereUniqueInput;
-  data: ItemUpdateWithoutPostedByDataInput;
+  update: ItemUpdateWithoutCategoryDataInput;
+  create: ItemCreateWithoutCategoryInput;
 }
 
-export interface ItemCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  description: String;
-  category?: Maybe<CategoryCreateOneWithoutItemslistInput>;
-  quantity: String;
-  comment: String;
-  rating: String;
-  postedBy?: Maybe<UserCreateOneWithoutItemsInput>;
-}
-
-export interface UserUpdateOneRequiredInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface CategoryCreateOneWithoutItemslistInput {
-  create?: Maybe<CategoryCreateWithoutItemslistInput>;
-  connect?: Maybe<CategoryWhereUniqueInput>;
-}
-
-export interface CategoryCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  itemslist?: Maybe<ItemCreateManyWithoutCategoryInput>;
-}
-
-export interface CategoryCreateWithoutItemslistInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-}
-
-export interface ItemUpsertNestedInput {
-  update: ItemUpdateDataInput;
-  create: ItemCreateInput;
-}
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
 
 export interface ItemUpdateInput {
   name?: Maybe<String>;
@@ -802,6 +858,31 @@ export interface ItemUpdateInput {
   comment?: Maybe<String>;
   rating?: Maybe<String>;
   postedBy?: Maybe<UserUpdateOneWithoutItemsInput>;
+}
+
+export interface OrderCreateInput {
+  id?: Maybe<ID_Input>;
+  orderedby: UserCreateOneInput;
+  itempurchased: ItemCreateOneInput;
+}
+
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface CategoryUpdateManyMutationInput {
+  name?: Maybe<String>;
+}
+
+export interface ItemCreateWithoutPostedByInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  description: String;
+  category?: Maybe<CategoryCreateOneWithoutItemslistInput>;
+  quantity: String;
+  comment: String;
+  rating: String;
 }
 
 export interface ItemWhereInput {
@@ -904,56 +985,19 @@ export interface ItemWhereInput {
   NOT?: Maybe<ItemWhereInput[] | ItemWhereInput>;
 }
 
-export interface ItemUpdateManyMutationInput {
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  quantity?: Maybe<String>;
-  comment?: Maybe<String>;
-  rating?: Maybe<String>;
+export interface ItemUpsertNestedInput {
+  update: ItemUpdateDataInput;
+  create: ItemCreateInput;
 }
 
-export interface CategoryUpsertWithoutItemslistInput {
-  update: CategoryUpdateWithoutItemslistDataInput;
-  create: CategoryCreateWithoutItemslistInput;
-}
-
-export interface CategoryUpdateWithoutItemslistDataInput {
-  name?: Maybe<String>;
-}
-
-export interface CategoryUpdateOneWithoutItemslistInput {
-  create?: Maybe<CategoryCreateWithoutItemslistInput>;
-  update?: Maybe<CategoryUpdateWithoutItemslistDataInput>;
-  upsert?: Maybe<CategoryUpsertWithoutItemslistInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<CategoryWhereUniqueInput>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface ItemSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ItemWhereInput>;
-  AND?: Maybe<ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput>;
-  OR?: Maybe<ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput>;
-  NOT?: Maybe<ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput>;
-}
-
-export interface ItemCreateOneInput {
-  create?: Maybe<ItemCreateInput>;
-  connect?: Maybe<ItemWhereUniqueInput>;
+export interface ItemCreateWithoutCategoryInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  description: String;
+  quantity: String;
+  comment: String;
+  rating: String;
+  postedBy?: Maybe<UserCreateOneWithoutItemsInput>;
 }
 
 export interface NodeNode {
@@ -1162,6 +1206,15 @@ export interface UserPromise extends Promise<User>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
+  itemsordered: <T = FragmentableArray<Item>>(args?: {
+    where?: ItemWhereInput;
+    orderBy?: ItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface UserSubscription
@@ -1180,6 +1233,15 @@ export interface UserSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  itemsordered: <T = Promise<AsyncIterator<ItemSubscription>>>(args?: {
+    where?: ItemWhereInput;
+    orderBy?: ItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface UserNullablePromise
@@ -1190,6 +1252,15 @@ export interface UserNullablePromise
   email: () => Promise<String>;
   password: () => Promise<String>;
   items: <T = FragmentableArray<Item>>(args?: {
+    where?: ItemWhereInput;
+    orderBy?: ItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  itemsordered: <T = FragmentableArray<Item>>(args?: {
     where?: ItemWhereInput;
     orderBy?: ItemOrderByInput;
     skip?: Int;
