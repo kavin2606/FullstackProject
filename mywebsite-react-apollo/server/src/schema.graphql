@@ -1,7 +1,8 @@
 type Query {
-  info: String!
   getItems(filter: String): [Item!]!
   usersorders: User!
+  getCategory(filter: String): [Item]
+  getCategoryItems(filter: String, filtercategory: String): [Item]
 }
 
 type Mutation {
@@ -19,7 +20,7 @@ type Item {
   quantity: String!
   postedBy: User
   category: Category
-  orderinfo: [Order!]!
+  orderinfo: Order
 }
 
 type AuthPayload {
