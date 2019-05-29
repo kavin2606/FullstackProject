@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { APP_SECRET, getUserId } = require('../utils')
 
-async function signup(parent, args, context, info) {
+async function createUser(parent, args, context, info) {
   // 1
   const password = await bcrypt.hash(args.password, 10)
   // 2
@@ -40,17 +40,14 @@ async function login(parent, args, context, info) {
   }
 }
 
-function post(parent, args, context, info) {
+function createItem(parent, args, context, info) {
   const userId = getUserId(context)
   return context.prisma.createItem({
-    name: args.name,
+    title: args.title,
     description: args.description,
-    comment: args.comment,
-    rating: args.rating,
     quantity: args.quantity,
     postedBy: { connect: { id: userId } },
     category: {connect:{name:args.category}},
-
   })
 }
 
@@ -64,16 +61,16 @@ function placeorder(parent,args,context,info) {
   const userId = getUserId(context)
   return context.prisma.createOrder({
   orderedby: { connect: { id: userId } },
-  itempurchased: { connect: { id:args.itempurchased } },
+  itempurchased: { connect: { id:args.id } },
   })
 
 }
 
 
 module.exports = {
-  signup,
+  createUser,
   login,
-  post,
+  createItem,
   addcategory,
   placeorder,
 }

@@ -1,9 +1,9 @@
 const { APP_SECRET, getUserId } = require('../utils')
-async function feed(parent, args, context, info) {
+async function getItems(parent, args, context, info) {
   const where = args.filter ? {
     OR: [
       { description_contains: args.filter },
-      { name_contains: args.filter },
+      { title_contains: args.filter },
     ],
   } : {}
 
@@ -18,9 +18,33 @@ function usersorders(parent, args, context, info) {
     id: userId,
   })
 }
+async function getCategory(parent, args, context, info) {
+  const where = args.filter ?{ category :{name: args.filter },} : {}
 
+
+  const items = await context.prisma.items({
+    where
+  })
+  return items
+}
+
+async function getCategoryItems(parent, args, context, info) {
+  const where = {
+    AND: [
+      { title_contains: args.filter },
+      { category :{name: args.filtercategory } },
+    ],
+  }
+
+  const links = await context.prisma.items({
+    where
+  })
+  return links
+}
 module.exports = {
-  feed,
-  usersorders
+  getItems,
+  usersorders,
+  getCategory,
+  getCategoryItems,
   //userslist: (root, args, context) => context.prisma.users()
 }
