@@ -59,9 +59,10 @@ function addcategory(parent, args, context, info) {
 
 function placeorder(parent,args,context,info) {
   const userId = getUserId(context)
+  console.log(userId);
   return context.prisma.createOrder({
   orderedby: { connect: { id: userId } },
-  itempurchased: { connect: { id:args.itempurchased } },
+  itempurchased: { connect: { id:args.id } },
   })
 
 }
