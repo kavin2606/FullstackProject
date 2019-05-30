@@ -7,9 +7,6 @@ const CREATE_ITEM_MUTATION = gql`
   mutation CreateItemMutation($title: String!, $description: String!, $category: String!, $quantity: String!) {
     createItem(  title: $title, description: $description, category: $category, quantity: $quantity) {
       title
-      description
-      quantity
-      category
     }
   }
 `
