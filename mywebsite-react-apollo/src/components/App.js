@@ -5,6 +5,7 @@ import Header from './Header'
 import Login from './Login'
 import Search from './Search'
 import CreateItem from './CreateItem'
+import '../styles/App.css';
 
 class App extends Component {
 
