@@ -8,6 +8,7 @@ const ITEM_QUERY = gql`
 {
   getItems(filter: "Apple")
   {
+     id
      title
      description
      quantity
