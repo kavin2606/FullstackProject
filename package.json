@@ -1,0 +1,8 @@
+{
+  "name": "FullStackProject",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kavin2606/FullStackProject.git",
+  "author": "kavin2606 <kavin2@pdx.edu>",
+  "license": "MIT"
+}

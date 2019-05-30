@@ -1,0 +1,51 @@
+type Query {
+  getItems(filter: String): [Item!]!
+  usersorders: User!
+  getCategory(filter: String): [Category]
+  getCategoryItems(filter: String, filtercategory: String): [Item]
+}
+
+type Mutation {
+  createItem(title: String!,description: String!,category: String! ,quantity: String!): Item!
+  createUser(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  addcategory(name:String!): Category
+  placeorder(id:String!): Order
+}
+
+type Item {
+  id: ID!
+  title: String!
+  description: String!
+  quantity: String!
+  postedBy: User
+  category: Category
+  orderinfo: Order
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  items: [Item!]!
+  orderdetails: [Order!]!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  itemslist:[Item!]!
+}
+
+type Order {
+  id: ID!
+  comment: String
+  rating: String
+  itempurchased: Item!
+  orderedby: User!
+}
