@@ -12,8 +12,8 @@ type User {
   name: String!
   email: String! @unique
   password: String!
-  items: [Item!]! @relation(name: "OldRelation")
-  itemsordered: [Item!]! @relation(name: "NewRelation")
+  itemsposted: [Item!]! @relation(name: "OldRelation")
+  orderdetails: [Order!]!
 }
 
 type Category {
@@ -24,8 +24,8 @@ type Category {
 
 type Order {
   id: ID! @id
-  comment: String!
-  rating: String!
+  comment: String
+  rating: String
   orderedby:User!
   itempurchased: Item!
 }
