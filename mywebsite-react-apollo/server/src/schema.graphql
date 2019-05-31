@@ -6,7 +6,7 @@ type Query {
 }
 
 type Mutation {
-  createItem(title: String!,description: String!,category: String! ,quantity: String!): Item!
+  createItem(title: String!,description: String!,category: String! ,quantity: String!, itemimg: String, price: String!): Item!
   createUser(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   addcategory(name:String!): Category
@@ -17,6 +17,8 @@ type Item {
   id: ID!
   title: String!
   description: String!
+  itemimg: String
+  price: String!
   quantity: String!
   postedBy: User
   category: Category
