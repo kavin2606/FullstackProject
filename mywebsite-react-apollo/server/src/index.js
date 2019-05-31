@@ -6,6 +6,8 @@ const User = require('./resolvers/User')
 const Item = require('./resolvers/Item')
 const Category = require('./resolvers/Category')
 const Order = require('./resolvers/Order')
+// var express = require('express');
+
 // let items = [{
 //   id: 'item-0',
 //   name: 'pen',
@@ -37,4 +39,9 @@ const server = new GraphQLServer({
     }
   },
 })
+
+// var app = express();
+// var bodyParser = require('body-parser');
+// app.use(bodyParser.json({ limit: '50mb' }));
+// app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 server.start(() => console.log(`Server is running on http://localhost:4000`))

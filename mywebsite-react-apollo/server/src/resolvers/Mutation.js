@@ -48,6 +48,8 @@ function createItem(parent, args, context, info) {
     quantity: args.quantity,
     postedBy: { connect: { id: userId } },
     category: {connect:{name:args.category}},
+    itemimg:args.itemimg,
+    price:args.price,
   })
 }
 

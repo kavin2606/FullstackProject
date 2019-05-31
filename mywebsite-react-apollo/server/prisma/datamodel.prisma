@@ -3,6 +3,8 @@ type Item {
   createdAt: DateTime! @createdAt
   title: String!
   description: String!
+  itemimg: String
+  price: String!
   category: Category
   quantity: String!
   postedBy: User @relation(name: "OldRelation")
