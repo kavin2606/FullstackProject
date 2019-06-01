@@ -5,7 +5,13 @@ class Item extends Component {
     return (
       <div>
         <div>
-          {this.props.item.description} ({this.props.item.title}, {this.props.item.quantity})
+          <p>
+            <p>Item Title: {this.props.item.title} </p>
+            <p>Title Id: {this.props.item.id}</p>
+            <p>Description: ({this.props.item.description})</p>
+            <p>Quantity: {this.props.item.quantity}</p>
+          </p>
+          <hr></hr>
         </div>
       </div>
     )
