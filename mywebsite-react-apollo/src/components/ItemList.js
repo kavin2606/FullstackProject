@@ -6,7 +6,7 @@ import Item from './Item'
 
 const ITEM_QUERY = gql`
 {
-  getItems(filter: "Apple")
+  getItems(filter: "")
   {
      id
      title
