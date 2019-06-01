@@ -7,7 +7,7 @@ class Item extends Component {
         <div>
           <p>
             <p>Item Title: {this.props.item.title} </p>
-            <p>Title Id: {this.props.item.id}</p>
+            <p>Item Id: {this.props.item.id}</p>
             <p>Description: ({this.props.item.description})</p>
             <p>Quantity: {this.props.item.quantity}</p>
           </p>
