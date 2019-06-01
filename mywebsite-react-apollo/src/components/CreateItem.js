@@ -70,14 +70,14 @@ class CreateItem extends Component {
             value={price}
             onChange={e => this.setState({ price: e.target.value })}
             type="text"
-            placeholder="The quantity for the item"
+            placeholder="The price for the item"
           />
           <input
             className="mb2"
             value={itemimg}
             onChange={e => this.setState({ itemimg: e.target.value })}
             type="text"
-            placeholder="The quantity for the image"
+            placeholder="The Item image for the image"
           />
         </div>
         <Mutation mutation={CREATE_ITEM_MUTATION} variables={{ title, description, quantity, category,price,itemimg }}>
