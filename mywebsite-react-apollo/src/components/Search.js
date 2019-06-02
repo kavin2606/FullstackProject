@@ -19,6 +19,8 @@ const ITEM_SEARCH_QUERY = gql`
           id
           name
         }
+        price
+        itemimg
 
     }
   }

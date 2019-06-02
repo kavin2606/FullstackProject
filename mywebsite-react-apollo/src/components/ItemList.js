@@ -12,6 +12,8 @@ const ITEM_QUERY = gql`
      title
      description
      quantity
+     itemimg
+     price
   }
 }`
 
@@ -24,7 +26,6 @@ class ItemList extends Component {
           if (error) return <div>Error</div>
 
           const itemsToRender = data.getItems
-
           return (
             <div>
               {itemsToRender.map(item => <Item key={item.id} item={item} />)}
