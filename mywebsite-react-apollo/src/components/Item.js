@@ -26,7 +26,8 @@ class Item extends Component {
           <td style={{width:500}}><p>Item Title: {this.props.item.title} </p>
           <p>Description: {this.props.item.description}</p>
           <p>Quantity: {this.props.item.quantity}</p>
-          <p>price: {this.props.item.price} </p></td>
+          <p>price: {this.props.item.price} </p>
+          <p>Category: {this.props.item.category.name}</p></td>
 
           <td>
                   <Mutation mutation={PLACE_ORDER_MUTATION} variables={{id}}>
