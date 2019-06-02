@@ -5,6 +5,7 @@ import Header from './Header'
 import Login from './Login'
 import Search from './Search'
 import CreateItem from './CreateItem'
+import CreateOrder from './CreateOrder'
 import '../styles/App.css';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={ItemList} />
           <Route exact path='/create' component={CreateItem} />
+          <Route exact path='/order' component={CreateOrder} />
           <Route exact path="/login" component={Login} />
           <Route exact path='/search' component={Search} />
         </Switch>
