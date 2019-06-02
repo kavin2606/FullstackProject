@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import $ from 'jquery';
-import {reactDOMNode} from 'react-dom'
 class Item extends Component {
   render() {
 
