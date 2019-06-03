@@ -14,6 +14,10 @@ const ITEM_QUERY = gql`
      quantity
      itemimg
      price
+     category{
+       id
+       name
+     }
   }
 }`
 
