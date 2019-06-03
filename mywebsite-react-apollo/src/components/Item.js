@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { AUTH_TOKEN } from '../constants'
 
 const PLACE_ORDER_MUTATION = gql`
 mutation PlaceOrderMutation($id: String!)
@@ -13,6 +14,7 @@ mutation PlaceOrderMutation($id: String!)
 `
 class Item extends Component {
   render() {
+    const authToken = localStorage.getItem(AUTH_TOKEN)
     let id = this.props.item.id;
     return (
       <div>
@@ -31,11 +33,13 @@ class Item extends Component {
                   <p><b>Category:</b> {this.props.item.category.name}</p>
                   <p><b>Item Id:</b> {this.props.item.category.id}</p>
                 </td>
-                <td>
-                  <Mutation mutation={PLACE_ORDER_MUTATION} variables={{id}}>
-                  {placeOrderMutation => <button onClick={placeOrderMutation}>Buy now</button>}
-                  </Mutation>
-                </td>
+                {authToken && (
+                  <td>
+                    <Mutation mutation={PLACE_ORDER_MUTATION} variables={{id}}>
+                    {placeOrderMutation => <button onClick={placeOrderMutation}>Buy now</button>}
+                    </Mutation>
+                  </td>
+                )}
               </tr>
             </tbody>
           </table>
