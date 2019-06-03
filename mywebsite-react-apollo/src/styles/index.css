@@ -5,7 +5,8 @@ body {
   background: url(./michael-weidemann-767334-unsplash.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
-  overflow: scroll
+  overflow: scroll;
+  background-color: #BECAC2;
 }
 
 input {
@@ -18,11 +19,12 @@ input {
 
 .searchBar{
   padding: 40px;
+  text-align: center;
 }
 .searchInput
 {
   display: inline;
-  width: 500px;
+  width: 450px;
   height: 40px;
 }
 .searchText
@@ -40,7 +42,32 @@ input {
   margin-right: 300px;
 }
 
-.orange {
+.ThankyouForPurchaseText
+{
+  text-align: center;
+}
+
+.companyName
+{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  color: #fff;
+  line-height: 125px;
+  text-align: center;
+  background: #000;
+  font-family:"Comic Sans MS";
+  font-size: 25px;
+  color: #F36154;
+  position:absolute;
+  top:10px;
+  left:10px;
+}
+
+.navbar {
+  padding: 10px;
+  padding-right: 25px;
+  padding-left: 25px;
   background-color: #232E3D;
   height: 40px;
 }
@@ -54,7 +81,7 @@ input {
 }
 
 .w85 {
-  width: 85%;
+  width: 80%;
 }
 
 .button {

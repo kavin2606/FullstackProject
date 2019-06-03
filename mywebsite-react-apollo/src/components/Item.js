@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import { AUTH_TOKEN } from '../constants'
 
 const PLACE_ORDER_MUTATION = gql`
@@ -35,9 +37,15 @@ class Item extends Component {
                 </td>
                 {authToken && (
                   <td>
+                  <Link to="/ThankyouForPurchase" className="ml1 no-underline white">
                     <Mutation mutation={PLACE_ORDER_MUTATION} variables={{id}}>
-                    {placeOrderMutation => <button onClick={placeOrderMutation}>Buy now</button>}
+                    {placeOrderMutation => <button onClick={
+                      async () => {
+                        await placeOrderMutation({ variables: { id } })
+                    }}>Buy now</button>
+                      }
                     </Mutation>
+                    </Link>
                   </td>
                 )}
               </tr>
@@ -50,4 +58,4 @@ class Item extends Component {
   }
 }
 
-export default Item
+export default withRouter(Item)
