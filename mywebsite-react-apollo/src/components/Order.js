@@ -8,10 +8,10 @@ class Order extends Component {
         <table>
           <tbody>
             <tr>
-              <td>
-                <img src={this.props.order.itempurchased.itemimg} alt={this.props.order.itempurchased.title} style={{width : '160px', height : '160px'}}/>
+              <td style={{width:250}}>
+                <img src={this.props.order.itempurchased.itemimg} alt={this.props.order.itempurchased.title} style={{width : '200px', height : '160px'}}/>
               </td>
-              <td>
+              <td style={{width:700}}>
                 <p><b>Purchased Item:</b> {this.props.order.itempurchased.title}</p>
                 <p><b>Description:</b> {this.props.order.itempurchased.description}</p>
                 <p><b>Price:</b> {this.props.order.itempurchased.price}</p>
@@ -21,6 +21,7 @@ class Order extends Component {
             </tbody>
           </table>
         </div>
+        <hr></hr>
       </div>
     )
   }
