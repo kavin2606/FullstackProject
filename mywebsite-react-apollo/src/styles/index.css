@@ -9,6 +9,11 @@ body {
   background-color: #BECAC2;
 }
 
+#root
+{
+  margin-top: 20px;
+}
+
 input {
   max-width: 500px;
 }
@@ -52,10 +57,9 @@ input {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  color: #fff;
   line-height: 125px;
   text-align: center;
-  background: #000;
+  background-color: #000;
   font-family:"Comic Sans MS";
   font-size: 25px;
   color: #F36154;
@@ -68,8 +72,9 @@ input {
   padding: 10px;
   padding-right: 25px;
   padding-left: 25px;
-  background-color: #232E3D;
-  height: 40px;
+  background-color: #000;
+  height: 60px;
+  opacity: 0.85;
 }
 
 .background-gray {
