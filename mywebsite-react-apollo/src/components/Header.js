@@ -7,9 +7,9 @@ class Header extends Component {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN)
     return (
-      <div className="flex pa1 justify-between nowrap orange">
+      <div className="flex pa1 justify-between nowrap navbar">
       <div className="flex flex-fixed white">
-      <div className="fw9 mr3">HappyBuy</div>
+      <div className="fw9 mr3 companyName">ShoppyHub</div>
       <Link to="/" className="ml1 no-underline white">
       home
       </Link>
