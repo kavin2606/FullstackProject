@@ -24,8 +24,12 @@ class Header extends Component {
         create item
         </Link>
         <div className="ml1">|</div>
-        <Link to="/order" className="ml1 no-underline black">
+        <Link to="/buy" className="ml1 no-underline black">
         buy
+        </Link>
+        <div className="ml1">|</div>
+        <Link to="/order" className="ml1 no-underline black">
+        purchase history
         </Link>
         </div>
       )}
