@@ -36,13 +36,13 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <div>
-          Search
-          <input
+        <div className="searchBar">
+          <div className="searchText">Search</div>
+          <input className="searchInput"
             type='text'
             onChange={e => this.setState({ filter: e.target.value })}
           />
-          <button onClick={() => this._executeSearch()}>OK</button>
+          <button className="searchButton" onClick={() => this._executeSearch()}>OK</button>
         </div>
         {this.state.items.map((item, index) => (
           <Item key={item.id} item={item} index={index} />
