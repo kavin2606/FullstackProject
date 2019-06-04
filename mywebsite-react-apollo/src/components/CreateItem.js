@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 
 const CREATE_ITEM_MUTATION = gql`
@@ -20,17 +22,6 @@ class CreateItem extends Component {
     price:'',
     itemimg:''
   }
-//   onChange(e)
-// {
-//   let files =e.target.files;
-//   let reader = new FileReader();
-//   reader.readAsDataURL(files[0]);
-//   reader.onload=(e)=>{
-//     this.setState({ itemimg: e.target.result })
-//   }
-//
-// }
-          // <input type="file" name="file" onChange={(e)=>this.onChange(e)}/>
 
   render() {
     const { title, description, category,  quantity,price,itemimg} = this.state
@@ -80,9 +71,14 @@ class CreateItem extends Component {
             placeholder="The Item image for the image"
           />
         </div>
-        <Mutation mutation={CREATE_ITEM_MUTATION} variables={{ title, description, quantity, category,price,itemimg }}>
-            {createItemMutation => <button onClick={createItemMutation}>Submit</button>}
-        </Mutation>
+        <Link to="/ThankyouForListingItem" className="ml1 no-underline white">
+          <Mutation mutation={CREATE_ITEM_MUTATION} variables={{ title, description, quantity, category,price,itemimg }}>
+              {createItemMutation => <button onClick={
+                async () => {
+                  await createItemMutation({ variables: { title, description, quantity, category,price,itemimg } })
+              }}>Submit</button>}
+          </Mutation>
+        </Link>
       </div>
     )
   }
