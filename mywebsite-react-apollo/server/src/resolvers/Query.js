@@ -23,9 +23,9 @@ function usersorders(parent, args, context, info) {
 async function getCategory(parent, args, context, info) {
 
 
-  const items = await context.prisma.categories({
+  const categories = await context.prisma.categories({
   })
-  return items
+  return categories
 }
 
 async function getCategoryItems(parent, args, context, info) {
