@@ -9,7 +9,7 @@ const ORDER_QUERY = gql`
 {
   usersorders
   {
-  	name
+    name
   }
 }`
 
@@ -17,7 +17,6 @@ class Header extends Component {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN)
     return (
-
       <div className="flex pa1 justify-between nowrap navbar">
       <div className="flex flex-fixed white">
       <div className="fw9 mr3 companyName">ShoppyHub</div>
@@ -47,30 +46,30 @@ class Header extends Component {
       </div>
       <div className="flex flex-fixed">
       {authToken ? (
-        <div
-        className="ml1 pointer white"
+        <div className="ml1 pointer white"
         onClick={() => {
           localStorage.removeItem(AUTH_TOKEN)
           this.props.history.push(`/`)
+        }}>
+        <div className="ml1 pointer white">Hi
+        <Query query={ORDER_QUERY}>
+        {({loading,data})=>{
+          if (loading) return 'loading...';
+          const {usersorders} = data;
+          return usersorders.name;
         }}
-        >      <div className="ml1 pointer white">Hi <Query query={ORDER_QUERY}>
-                    {({loading,data})=>{
-                      if (loading) return 'loading...';
-                      const {usersorders} = data;
-                      return usersorders.name;
-                    }}
-                    </Query></div>
-        logout
-        </div>
-      ) : (
+        </Query>
+        </div>&nbsp;logout</div>
+      ):(
         <Link to="/login" className="ml1 no-underline white">
         login
         </Link>
-      )}
-      </div>
-      </div>
-    )
-  }
+      )
+    }
+    </div>
+    </div>
+  )
+}
 }
 
 export default withRouter(Header)
