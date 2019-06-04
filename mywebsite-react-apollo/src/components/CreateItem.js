@@ -84,4 +84,4 @@ class CreateItem extends Component {
   }
 }
 
-export default CreateItem
+export default withRouter(CreateItem)

@@ -18,6 +18,10 @@ const ITEM_QUERY = gql`
        id
        name
      }
+     postedBy
+    {
+      name
+    }
   }
 }`
 

@@ -34,6 +34,7 @@ class Item extends Component {
                   <p><b>Quantity:</b> {this.props.item.quantity}</p>
                   <p><b>Category:</b> {this.props.item.category.name}</p>
                   <p><b>Item Id:</b> {this.props.item.category.id}</p>
+                  <p><b>Posted By:</b> {this.props.item.postedBy.name}</p>
                 </td>
                 {authToken && (
                   <td>

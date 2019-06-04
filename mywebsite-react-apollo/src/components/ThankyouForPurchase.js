@@ -6,7 +6,7 @@ class ThankyouForPurchase extends Component {
     return (
       <div className="ThankyouText">
       <div>
-          <h3>Thankyou for your Purchase!</h3>
+          <h3>Thank you for your Purchase!</h3>
           <p>Your order will be shipped soon!</p>
           <p>Estimated Delivery: 5 - 7 Business days</p>
       </div>
