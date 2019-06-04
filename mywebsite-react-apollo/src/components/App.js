@@ -8,6 +8,7 @@ import CreateItem from './CreateItem'
 import CreateOrder from './CreateOrder'
 import OrderList  from './OrderList'
 import ThankyouForPurchase from './ThankyouForPurchase'
+import ThankyouForListingItem from './ThankyouForListingItem'
 import '../styles/App.css';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route exact path='/search' component={Search} />
           <Route exact path='/order' component={OrderList} />
           <Route exact path='/ThankyouForPurchase' component={ThankyouForPurchase} />
+          <Route exact path='/ThankyouForListingItem' component={ThankyouForListingItem} />
         </Switch>
       </div>
     </div>

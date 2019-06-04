@@ -4,7 +4,7 @@ class ThankyouForPurchase extends Component {
 
   render() {
     return (
-      <div className="ThankyouForPurchaseText">
+      <div className="ThankyouText">
       <div>
           <h3>Thankyou for your Purchase!</h3>
           <p>Your order will be shipped soon!</p>
