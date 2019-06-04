@@ -61,7 +61,6 @@ function addcategory(parent, args, context, info) {
 
 function placeorder(parent,args,context,info) {
   const userId = getUserId(context)
-  console.log(userId);
   return context.prisma.createOrder({
   orderedby: { connect: { id: userId } },
   itempurchased: { connect: { id:args.id } },
@@ -69,6 +68,16 @@ function placeorder(parent,args,context,info) {
 
 }
 
+function updatequantity(parent, args, context, info) {
+  return context.prisma.updateItem({
+    where:{
+      id: args.id
+    },
+    data:{
+      quantity: args.quantity
+    }
+})
+}
 
 module.exports = {
   createUser,
@@ -76,4 +85,5 @@ module.exports = {
   createItem,
   addcategory,
   placeorder,
+  updatequantity,
 }
