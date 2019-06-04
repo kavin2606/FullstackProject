@@ -1,7 +1,7 @@
 type Query {
   getItems(filter: String): [Item!]!
   usersorders: User!
-  getCategory(filter: String): [Item]
+  getCategory(filter: String): [Category]
   getCategoryItems(filter: String, filtercategory: String): [Item]
 }
 

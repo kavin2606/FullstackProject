@@ -12,18 +12,18 @@ async function getItems(parent, args, context, info) {
   })
   return items
 }
+
 function usersorders(parent, args, context, info) {
   const userId = getUserId(context)
   return context.prisma.user({
     id: userId,
   })
 }
+
 async function getCategory(parent, args, context, info) {
-  const where = args.filter ?{ category :{name: args.filter },} : {}
 
 
-  const items = await context.prisma.items({
-    where
+  const items = await context.prisma.categories({
   })
   return items
 }
