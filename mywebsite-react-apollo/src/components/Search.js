@@ -21,6 +21,10 @@ const ITEM_SEARCH_QUERY = gql`
         }
         price
         itemimg
+        postedBy
+    {
+      name
+    }
 
     }
   }
