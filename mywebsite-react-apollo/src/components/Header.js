@@ -51,7 +51,7 @@ class Header extends Component {
           localStorage.removeItem(AUTH_TOKEN)
           this.props.history.push(`/`)
         }}>
-        <div className="ml1 pointer white">Hi
+        <div className="ml1 pointer white">Hi,&nbsp;
         <Query query={ORDER_QUERY}>
         {({loading,data})=>{
           if (loading) return 'loading...';
